@@ -13,6 +13,13 @@
 		<input type="text" name="user" id="user"><br>
 		<label for="pw">Password</label>
 		<input type="password" name="pw" id="pw"><br>
+
+		<label for="email">email</label>
+		<input type="email" name="email" id="email"><br>
+		<label for="phone">phone</label>
+		<input type="tel" name="phone" id="phone"><br>
+
+
 		<input type="submit">
 	</form>
 	<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
@@ -23,7 +30,9 @@
 				console.log("submit 2");
 
 				var dataToSend = {
-					usuario: $('#user').val(), 
+					usuario: $('#user').val(),
+					email: $('#email').val(),
+					phone: $('#phone').val(),
 					pw: $('#pw').val() 
 				};
 

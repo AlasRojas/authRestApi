@@ -1,6 +1,6 @@
 <?php 
 	$host = "localhost";
 	$user = "root";
-	$password = "root";
-	$db = "authRest";
+	$password = "";
+	$db = "authrest";
 ?>
