@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ingresar</title>
+</head>
+<body class="logInView">
+	<form id='loginForm'>
+		<label>Usuario: </label><br>
+		<input type="text" name="usuario" id="user"><br>
+		<label>Contraseña: </label><br>
+		<input type="password" name="pw" id="pw"><br>
+		<input type="submit">
+	</form>
+	<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#loginForm").submit(function($evt){
+				$evt.preventDefault();
+				console.log("submit 2");
+
+				var dataToSend = {
+					usuario: $('#user').val(), 
+					pw: $('#pw').val() 
+				};
+
+
+				$.ajax({
+					method: "POST",
+					url: "services/login_user.php",
+					data: dataToSend
+				})
+				.done(function( msg ) {
+					console.log( msg );
+					//console.log( msg.succes );
+				})
+				.fail(function( jqXHR, textStatus ) {
+					console.log( "Request failed: " + textStatus );
+				});
+
+			});
+		});
+	</script>
+</body>
+</html>

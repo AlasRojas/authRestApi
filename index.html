@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<button>cerrar sesion</button>
+
+	<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+
+			$.ajax({
+				method: "POST",
+				url: "services/get_sesion.php",
+				dataType: "json"
+			})
+			.done(function( msg ) {
+				console.log( msg );
+				//console.log( msg.succes );
+			})
+			.fail(function( jqXHR, textStatus ) {
+				console.log( "Request failed: " + textStatus );
+			});
+
+			$('button').click(function($evt){
+				$evt.preventDefault();
+				$.ajax({
+					method: "POST",
+					url: "services/logout.php"
+				})
+				.done(function( msg ) {
+					console.log( msg );
+					//console.log( msg.succes );
+				})
+				.fail(function( jqXHR, textStatus ) {
+					console.log( "Request failed: " + textStatus );
+				});
+			});
+		});
+	</script>
+</body>
+</html>

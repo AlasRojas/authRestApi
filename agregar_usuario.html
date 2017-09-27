@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Agregar Usuario</title>
+</head>
+<body>
+	<?php 
+	echo $_SESSION['username'];
+	?>
+	<form>
+		<label for="usuario">Nombre de usuario</label>
+		<input type="text" name="user" id="user"><br>
+		<label for="pw">Password</label>
+		<input type="password" name="pw" id="pw"><br>
+		<input type="submit">
+	</form>
+	<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("form").submit(function($evt){
+				$evt.preventDefault();
+				console.log("submit 2");
+
+				var dataToSend = {
+					usuario: $('#user').val(), 
+					pw: $('#pw').val() 
+				};
+
+
+				$.ajax({
+					method: "POST",
+					url: "services/add_user.php",
+					dataType: "json",
+					data: dataToSend
+				})
+				.done(function( msg ) {
+					console.log( msg );
+					//console.log( msg.succes );
+				})
+				.fail(function( jqXHR, textStatus ) {
+					console.log( "Request failed: " + textStatus );
+				});
+
+			});
+		});
+	</script>
+</body>
+</html>
