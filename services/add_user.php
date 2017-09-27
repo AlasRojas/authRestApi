@@ -26,14 +26,14 @@
 			'usuario' => $_POST['usuario'],
 			'pw' => $has_pw
 		);
-/*
+
 		$to = $_POST['email'];
 		$subject = "My subject";
 		$txt = "Hello world!";
 		$headers = "From: webmaster@example.com";
 
 		mail($to,$subject,$txt,$headers);
-*/
+
 
 		echo json_encode($data);
 
