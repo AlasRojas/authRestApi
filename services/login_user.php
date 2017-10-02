@@ -19,14 +19,28 @@ if( isset( $_POST['usuario'] ) && !empty( $_POST['usuario'] ) &&
 
 	if( $has_pw == $session['pw'] ){
 		$_SESSION['username'] = $_POST['usuario'];
-		//header('Location: index.php');
-		echo "Session correcta";
+		$data = array(
+			'succes' => 'true',
+			'data' => 'Session Iniciada'
+		);
+
+		echo json_encode($data);
 	}else{
-		echo "Error en password";
+		$data = array(
+			'succes' => 'false',
+			'data' => 'Error en contraseña'
+		);
+
+		echo json_encode($data);
 	}
 }else{
-	//header('Location: login.html');
-	echo "error al ingresar los datos";
+	$data = array(
+		'succes' => 'false',
+		'data' => 'error al ingresar los datos'
+	);
+
+	echo json_encode($data);
+	//echo "error al ingresar los datos";
 }
 
 ?>

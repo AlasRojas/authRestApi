@@ -24,10 +24,10 @@
 					pw: $('#pw').val() 
 				};
 
-
 				$.ajax({
 					method: "POST",
 					url: "services/login_user.php",
+					dataType: "json",
 					data: dataToSend
 				})
 				.done(function( msg ) {

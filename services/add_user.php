@@ -16,23 +16,35 @@
 
 		mysql_select_db( $db, $conection )or die("Problemas al ingresar al la db ". mysql_error());
 
-		$has_pw = hash('sha512', $_POST['pw']);
+		$has_pw = hash('sha512', $_POST['pw'] );
 
-		mysql_query("INSERT INTO usuarios (user, pw, email, phone) VALUES ('$_POST[usuario]','".$has_pw."', '$_POST[email]','$_POST[phone]')", $conection);
+		$has_accesstoken = hash('sha512', $_POST['email'] );
+		$has_accesssecret = hash('sha512', $_POST['pw'] . $_POST['email'] );
+
+		$saveData = mysql_query("INSERT INTO usuarios (user, pw, accesstoken, accesssecret, email, phone) VALUES ('$_POST[usuario]', '".$has_pw."', '".$has_accesstoken."', '".$has_accesssecret."', '$_POST[email]', '$_POST[phone]')", $conection);
+					//mysql_query("INSERT INTO usuarios (user, pw, accesstoken, accesssecret, email, phone) VALUES ('$_POST[usuario]', '".$has_pw."', '1')", $conection);
+
 		//echo "Datos insertados";
 
 		$data = array(
 			'succes' => 'true',
 			'usuario' => $_POST['usuario'],
+			'accesstoken' => $has_accesstoken,
+			'accesssecret' => $has_accesssecret,
+			'demo' => $saveData,
 			'pw' => $has_pw
 		);
 
-		$to = $_POST['email'];
-		$subject = "My subject";
-		$txt = "Hello world!";
-		$headers = "From: webmaster@example.com";
+		if ( $saveData ) {
+			$to = $_POST['email'];
+			$subject = "My subject";
+			$txt = "Hello world!<br><a href='http://alpharouge.com/authRestApi/index.html#accesstoken=".$has_accesstoken."&accesssecret=".$has_accesssecret."'>Confirmar</a>";
+			$headers = "From: webmaster@example.com";
 
-		mail($to,$subject,$txt,$headers);
+			mail($to,$subject,$txt,$headers);
+		}
+
+		
 
 
 		echo json_encode($data);
