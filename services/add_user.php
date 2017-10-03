@@ -38,7 +38,7 @@
 		if ( $saveData ) {
 			$to = $_POST['email'];
 			$subject = "My subject";
-			$txt = "Hello world!<br><a href='http://alpharouge.com/authRestApi/index.html#accesstoken=".$has_accesstoken."&accesssecret=".$has_accesssecret."'>Confirmar</a>";
+			$txt = "<!DOCTYPE html><html><body>Hello world!<br><a href='http://alpharouge.com/authRestApi/activar_cuenta.html#accesstoken=".$has_accesstoken."&accesssecret=".$has_accesssecret."'>Confirmar</a></body></html>";
 			$headers = "From: webmaster@example.com";
 
 			mail($to,$subject,$txt,$headers);

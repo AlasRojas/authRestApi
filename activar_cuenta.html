@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>Activar cuenta</h1>
+	<div class="result"></div>
+	<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		var location = window.location.href;
+		var locationVar = location.slice( location.indexOf("#") );
+		var varArray = locationVar.split('&');
+		console.log( varArray[0] );
+
+
+		var dataToSend = {
+			accesstoken: varArray[0].replace('#accesstoken=',''), 
+			accesssecret: varArray[1].replace('accesssecret=','')
+		};
+
+
+
+		$.ajax({
+			method: "POST",
+			url: "services/activate_account.php",
+			dataType: "json",
+			data: dataToSend
+		})
+		.done(function( msg ) {
+			console.log( msg );
+			console.log( msg.data );
+			if ( msg.data == true ) {
+				console.log("cuenta activa");
+			}else{
+				console.log("error al activar");
+			};
+			//console.log( msg.succes );
+		})
+		.fail(function( jqXHR, textStatus ) {
+			console.log( "Request failed: " + textStatus );
+		});
+	});
+	</script>
+</body>
+</html>
